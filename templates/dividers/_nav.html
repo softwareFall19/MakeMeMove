@@ -1,0 +1,41 @@
+{% load static %}
+
+<nav class="navbar fixed-top navbar-expand-sm navbar-light bg-primary py-4">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'index' %}">MakeMeMove</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html">Buy</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" href="index.html">Sell</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" href="index.html">Rent</a>
+                </li>
+            </li>
+            <li class="nav-item">
+                    <a class="nav-link" href="index.html">Find an Agent</a>
+            </li>
+              </ul>
+            
+                  <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                                <a class="nav-link" href="{% url 'signup' %}">Sign up</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link" href="{% url 'signin' %}">Sign in</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link" href="index.html">Advertise</a>
+                        </li> 
+                  </ul>
+            
+            </div>
+        </div>
+    </nav>

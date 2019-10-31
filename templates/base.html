@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MakeMeMove | Welcome</title>
+
+    <!-- Bootstrap core CSS-->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+    <!-- Font-awesome and CSS styles -->
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    
+</head>
+<body>
+
+    <!-- Nav bar -->
+    {% include 'dividers/_nav.html' %}
+
+
+        
+    {% block content %} 
+    {% endblock %}
+
+    <!-- footer -->
+    {% include 'dividers/_footer.html' %}
+    
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/lightbox.min.js' %}"></script>
+        
+</body>
+</html>

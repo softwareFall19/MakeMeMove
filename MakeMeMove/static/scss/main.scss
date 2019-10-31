@@ -1,0 +1,23 @@
+/* BASE -- mixins, reset, variables, base */
+
+@import 'base/_variables.scss';
+@import 'base/_mixins.scss';
+@import 'base/_reset.scss';
+@import 'base/_base.scss';
+
+/* Modules -- each page and its components */
+
+@import 'modules/_visualtext.scss';
+@import 'modules/_blocks.scss';
+@import 'modules/_btns.scss';
+@import 'modules/_sections.scss';
+@import 'modules/_constituents.scss';
+
+
+
+/* Layouts --  */
+
+@import 'layouts/_navbar.scss';
+@import 'layouts/_header.scss';
+@import 'layouts/_footer.scss';
+

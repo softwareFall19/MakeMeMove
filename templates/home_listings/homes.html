@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+ <section id="homes" class="pt-5">
+        <div class="container">
+            <div class="card-deck">
+                {% if homes  %}
+                    {% for home in homes %}
+                    <div class="card">
+                        <img src="/static/img/houses/front1.webp" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">2148 Wildcat Cliff</h5>
+                          <p>Lawrenceville, GA 30046</p>
+                          <hr>
+                            <div class="row py-2 text-secondary">
+                                <div class="col-6">Square ft: 3200</div>
+                      
+                                <div class="col-6"></i> Garage: 2</div>
+                            </div>
+                            <div class="row py-2 text-secondary">
+                                <div class="col-6">Bedrooms: 3</div>
+                                <div class="col-6">Bathrooms: 2</div>
+                            </div>
+                        <hr>
+                        </div>
+                      </div>
+                  </div>
+
+                {% endfor %}
+
+                {% else %}
+                  <div class="col-md-12">
+                      <p>No Homes listed</p>
+                  </div>
+
+                {% endif %}
+                
+                
+            
+        </div>
+ </section>
+    
+{% endblock %}
+
+
+ 
