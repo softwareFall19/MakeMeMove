@@ -1,6 +1,31 @@
-/* BASE -- mixins, reset, variables, base */
-/* Modules -- each page and its components */
-/* Layouts --  */
 body{
-    color: red;
+    color: hotpink;
 }
+
+.homes { 
+    padding-top: 5;
+}
+
+.topIndex {
+    height: 1000px;
+}
+
+#bkground {
+    
+    background-image: url("/static/img/big.jpg");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+ input[type=search] {
+     padding: 40px;
+ }
+
+ button[type=submit] {
+     padding: 3px;
+     margin-left: -6px;
+     padding-bottom: 6px;
+     padding-top: 3px;
+ }

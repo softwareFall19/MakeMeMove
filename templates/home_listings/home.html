@@ -1,1 +1,49 @@
-<h1>Home</h1>
+{% extends 'base.html' %}
+{% load humanize %}
+
+
+{% block content %}
+ <section id="homes" class="pt-5">
+        <div class="container pt-5">
+            <div class="card-deck">
+                {% if homes  %}
+                    {% for home in homes %}
+                    <div class="card">
+                        <img src="{{ home.top_photo.url }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h4 class="card-title">${{ home.price | intcomma }}</h4class></h4>
+                          <h5 class="card-title">{{ home.address }}</h5>
+                          <p>{{ home.city }}, {{ home.state }} {{ home.zipcode }}</p>
+                          <hr>
+                            <div class="row py-2 text-secondary">
+                                <div class="col-6">{{ home.homesize  | intcomma }} sqft</div>
+                      
+                                <div class="col-6"></i> Garage: {{ home.garage }}</div>
+                            </div>
+                            <div class="row py-2 text-secondary">
+                                <div class="col-6">Bds: {{ home.bedrooms }}</div>
+                                <div class="col-6">Ba: {{ home.bathrooms }}</div>
+                            </div>
+                        <hr>
+                        </div>
+                      </div>
+                  
+
+                {% endfor %}
+
+                {% else %}
+                  <div class="col-md-12">
+                      <p>No Homes listed</p>
+                  </div>
+
+                {% endif %}
+            </div>    
+                
+            
+        </div>
+ </section>
+    
+{% endblock %}
+
+
+ 
