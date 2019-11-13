@@ -1,16 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+
 from .models import Home
 from django.db.models import Q
+from .forms import SellerForm
+from django.contrib.auth.decorators import login_required
+
+
 
 
 
 # Create your views here.
 
-def index(request):
+def homeList(request):
 
     homes = Home.objects.all()
-
-    
 
     context = {
         'homes': homes
@@ -18,15 +21,15 @@ def index(request):
 
     return render(request, 'home_listings/homes.html', context)
     
-def home(request):
+def home(request, home_id):
 
-    homes = Home.objects.all()
-
-    
+    home = Home.objects.get(pk=home_id)
 
     context = {
-        'homes': homes
+        'home': home
     }
+
+    
     return render(request, 'home_listings/home.html', context)
 
 
@@ -53,4 +56,19 @@ def lookup(request):
     }
 
     return render(request, 'home_listings/lookup.html', context)
+@login_required
+def seller(request): 
+    if request.method == 'POST':
+        form = SellerForm(request.POST, request.FILES)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.user = request.user
+            form.save()
+            return redirect('homes')
+    else:
+        form = SellerForm()
 
+    return render(request, 'sellers/seller_form.html', {
+        'form': form
+    }
+    )

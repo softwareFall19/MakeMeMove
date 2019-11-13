@@ -3,13 +3,40 @@
 
 
 {% block content %}
+
+<!-- <div class="modal fade modalHome" id="homeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content"> 
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">{{ home.property_title }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h1>kdjsklsk sdjlskjs s;ksjl slcksjc s</h1>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+      
+        
+   
  <section id="homes" class="pt-5">
         <div class="container pt-5">
-            <div class="card-deck">
+            <div class="row">
                 {% if homes  %}
                     {% for home in homes %}
-                    <div class="card">
-                        <img src="{{ home.top_photo.url }}" class="card-img-top" alt="...">
+                    
+                    <div class="col-md-3 mb-4">
+                      <div class="card openBtn">
+                          <a data-toggle="modal" data-target="#homeModal" href="{% url 'home' home.id %}">
+                             <img src="{{ home.top_photo.url }}" class="card-img-top" alt="...">
+                          </a>
                         <div class="card-body">
                           <h4 class="card-title">${{ home.price | intcomma }}</h4class></h4>
                           <h5 class="card-title">{{ home.address }}</h5>
@@ -24,9 +51,10 @@
                                 <div class="col-6">Bds: {{ home.bedrooms }}</div>
                                 <div class="col-6">Ba: {{ home.bathrooms }}</div>
                             </div>
-                        <hr>
+                          <hr>
                         </div>
                       </div>
+                    </div>
                   
 
                 {% endfor %}

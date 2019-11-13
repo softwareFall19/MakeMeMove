@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div class="jumbotron text-center py-5 mt-5">
+    <div><h1>For Sale By Owner</h1></div>
+      <div><p>Post your home for sale and it will be listed in the largest home-buying network in the world</p></div>
+</div>
+<div class="centering">
+   <div class="container">
+     
+      {% crispy form %}
+  </div>
+</div>
+  
+
+
+{% endblock %}
