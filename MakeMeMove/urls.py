@@ -10,6 +10,7 @@ urlpatterns = [
     path('homes/', include('homes.urls')),
     path('contacts/', include('contacts.urls')),
     path('userprofiles/', include('userprofiles.urls')),
+    
 ] 
 
 if settings.DEBUG:

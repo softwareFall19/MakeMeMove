@@ -1,5 +1,6 @@
 body{
-    color: hotpink;
+    color: black;
+    
 }
 
 .homes { 
@@ -13,6 +14,15 @@ body{
 #bkground {
     
     background-image: url("/static/img/big.jpg");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+#homeBkground {
+    
+    background-image: url("/static/img/bkg.jpg");
     height: 100%; 
     background-position: center;
     background-repeat: no-repeat;
@@ -33,4 +43,10 @@ body{
 .card:hover{
 
     background-color: white;
+}
+
+#cardCenter {
+    margin: 0 auto; 
+    float: none; 
+    margin-bottom: 10px;
 }
