@@ -29,26 +29,25 @@
                         <li class="nav-item">
                         {% if user.is_authenticated %}
                                 <li class="nav-item">
-                                        <a class="nav-link text-uppercase font-weight-bold">Hello, {{ user.username }}</a>
+                                        <a class="nav-link text-uppercase font-weight-bold" href = "{% url 'user_home' %}">Hello, {{ user.username }}</a>
                                 </li>
                         
                                 <li class="nav-item">
                                         <a class="nav-link" href="{% url 'signout' %}">Signout</a>
                                 </li>
-                                <li class="nav-item">
-                                        <a class="nav-link" href="index.html">Advertise</a>
-                                </li> 
                         
                         {% else %}
+                                <li class="nav-item"></li>
                                         <a class="nav-link" href="{% url 'signup' %}">Sign up</a>
                                 </li>
                                 <li class="nav-item">
                                         <a class="nav-link" href="{% url 'signin' %}">Sign in</a>
-                                </li>
-                                <li class="nav-item">
-                                        <a class="nav-link" href="index.html">Advertise</a>
                                 </li> 
                         {% endif %}
+
+                        <li class="nav-item">
+                                <a class="nav-link" href="index.html">Advertise</a>
+                        </li> 
                   </ul>
             
             </div>
