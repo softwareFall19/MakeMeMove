@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<section class="pt-5">
+        <div class="contain pt-4">
+                <div class="card">
+                        <img src="static/img/advertise.jpg" style="width:100%" class="card-img" alt="">
+                        <div class="card-img-overlay">
+                          <h1 class="center_ad">MakeMeMove Agent Advertising</h1>
+                          <p class=""></p>
+                        </div>
+                </div>
+            
+        </div>
+    
+</section>
+
+<section class="pt-5">
+    <div class="container pt-5">
+
+        <div class="card">
+            <div class="row no-gutters">
+                
+                <div class="col-md-6">
+                    <div class="card-body">
+                    <h5 class="card-title">Grow your career in real estate</h5>
+                    <p class="card-text">MakeMeMove agents close on more homes than any other real estate business in the country. Advertise
+                        your business today.
+                    </p>
+                    
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img src="static/img/two_meet.jpg" class="card-img" alt="...">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<div class="containe ad_start py-5 mt-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 col-md-10">
+            <div class="card mb-4">
+              <div class="card-body">
+                  <h2>Get Started</h2>
+                  <div class="centering">
+                      <div class="container">
+                        
+                            <form action="" method="post">
+                                    {% csrf_token %}
+                                    {{ form|crispy }}
+                                    <input type="submit" value="Submit" class="btn btn-primary">
+                            </form>
+
+                     </div>
+                   </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}

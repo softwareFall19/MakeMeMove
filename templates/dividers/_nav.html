@@ -17,11 +17,11 @@
                         <a class="nav-link" href="{% url 'seller' %}">Sell</a>
                 </li>
                 <li class="nav-item">
-                        <a class="nav-link" href="index.html">Rent</a>
+                        <a class="nav-link" href="{% url 'renters' %}">Rent</a>
                 </li>
             </li>
             <li class="nav-item">
-                    <a class="nav-link" href="index.html">Find an Agent</a>
+                    <a class="nav-link" href="{% url 'agents' %}">Find an Agent</a>
             </li>
               </ul>
             
@@ -30,13 +30,14 @@
                         {% if user.is_authenticated %}
                                 <li class="nav-item">
                                         <a class="nav-link text-uppercase font-weight-bold">Hello, {{ user.username }}</a>
+                                        <!-- <a class="nav-link text-uppercase font-weight-bold" href = "{% url 'user_home' %}">Hello, {{ user.username }}</a> -->
                                 </li>
                         
                                 <li class="nav-item">
                                         <a class="nav-link" href="{% url 'signout' %}">Signout</a>
                                 </li>
                                 <li class="nav-item">
-                                        <a class="nav-link" href="index.html">Advertise</a>
+                                        <a class="nav-link" href="{% url 'advertising' %}">Advertise</a>
                                 </li> 
                         
                         {% else %}
@@ -46,7 +47,7 @@
                                         <a class="nav-link" href="{% url 'signin' %}">Sign in</a>
                                 </li>
                                 <li class="nav-item">
-                                        <a class="nav-link" href="index.html">Advertise</a>
+                                        <a class="nav-link" href="{% url 'advertising' %}">Advertise</a>
                                 </li> 
                         {% endif %}
                   </ul>

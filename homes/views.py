@@ -23,7 +23,7 @@ def homeList(request):
     
 def home(request, home_id):
 
-    home = Home.objects.get(pk=home_id)
+    home = get_object_or_404(Home, pk=home_id)
 
     context = {
         'home': home
@@ -56,7 +56,9 @@ def lookup(request):
     }
 
     return render(request, 'home_listings/lookup.html', context)
-@login_required
+
+
+
 def seller(request): 
     if request.method == 'POST':
         form = SellerForm(request.POST, request.FILES)
@@ -70,5 +72,4 @@ def seller(request):
 
     return render(request, 'sellers/seller_form.html', {
         'form': form
-    }
-    )
+    })

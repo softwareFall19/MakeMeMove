@@ -14,9 +14,11 @@
         <div class="d-flex justify-content-center pt-5">
                 <form method="GET" action="{% url 'lookup' %}" class="search">
                     {% csrf_token %}
-                        <div>
-                            <input class="py-3 pr-2" size="100" type="search" name="search" value="{{ request.GET.get.search }}" placeholder="Enter an address, city or ZIP code">
-                            <button type="submit" value=""><i class="fas fa-search fa-1x py-3 mx-3"></i></button>
+                        <div class="input-group">
+                            <input class="form-control" size="100" type="search" name="search" value="{{ request.GET.get.search }}" placeholder="Enter an address, city or ZIP code">
+                           <div class="input-group-btn">
+                            <button type="submit" class="btn btn-info" value=""><i class="fas fa-search"></i></button>
+                           </div>
                         </div>
                     </form>
         </div>

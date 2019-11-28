@@ -3,8 +3,27 @@ body{
     
 }
 
+.card img:hover {
+    filter: grayscale(100%);
+    transform: scale(1.1);
+}
+
+.card-img-top img:hover {
+    filter: grayscale(100%);
+    transform: scale(1.1);
+}
+
 .homes { 
     padding-top: 5;
+}
+
+p.card-title {
+    background-color: black;
+    width: 30%;
+    opacity: 0.5;
+    position: absolute;
+    top: 1px;
+    left: 1px;
 }
 
 .topIndex {
@@ -49,4 +68,29 @@ body{
     margin: 0 auto; 
     float: none; 
     margin-bottom: 10px;
+}
+
+.fa-search {
+    font-size: 71px;
+}
+
+.btn-info {
+    padding: 10px;
+    width: 100px;
+}
+
+.form-control {
+    padding: 0px;
+}
+
+.center_ad {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+}
+div.ad_start {
+    background-color: blue;
 }

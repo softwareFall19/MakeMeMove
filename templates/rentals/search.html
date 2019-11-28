@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+
+{% block content %}
+ <section id="homes" class="pt-5">
+        <div class="container pt-5">
+            <div class="card-deck">
+                {% if rentals  %}
+                    {% for rental in rentals %}
+                    <div class="card">
+                        <img src="{{ rental.top_photo.url }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h4 class="card-title">${{ rental.price | intcomma }}/month</h4class></h4>
+                          <h5 class="card-title">{{ rental.address }}</h5>
+                          <p>{{ rental.city }}, {{ rental.state }} {{ rental.zipcode }}</p>
+                          <hr>
+                            <div class="row py-2 text-secondary">
+                                <div class="col-6">{{ rental.homesize  | intcomma }} sqft</div>
+                      
+                                <div class="col-6">Garage: {{ rental.garage }}</div>
+                            </div>
+                            <div class="row py-2 text-secondary">
+                                <div class="col-6">Bds: {{ rental.bedrooms }}</div>
+                                <div class="col-6">Ba: {{ rental.bathrooms }}</div>
+                            </div>
+                        <hr>
+                        </div>
+                      </div>
+                  
+
+                {% endfor %}
+
+                {% else %}
+                  <div class="col-md-12">
+                      <p>No Homes listed</p>
+                  </div>
+
+                {% endif %}
+            </div>    
+                
+            
+        </div>
+ </section>
+    
+{% endblock %}
+
+
+ 

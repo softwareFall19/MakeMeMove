@@ -1,54 +1,99 @@
+def clean_property_title(self, *args, **kwargs):
+        property_title = self.cleaned_data.get('property_title')
+        word_count = len(property_title)
+        if word_count > 25:
+            raise forms.ValidationError("This field is too long")
+        if property_title == "":
+            raise forms.ValidationError("Empty. Fill the field")
+        
+        return property_title
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-        Launch demo modal
-      </button>
-      
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                    <form method="POST" action="{% url 'contactInfo' %}">
-                        {% csrf_token %}
-                        {% if user.is_authenticated %}
-                           <input type="hidden" name="user_id" value="{{ user.id }}">
-                        {% else %}
-                        <input type="hidden" name="user_id" value="0">
-                        {% endif %}
-                        <input type="hidden" name="agent_email" value="{{ home.agent.email }}">
-                        <input type="hidden" name="home_id" value="{{ home.id }}">
-                            <div class="form-group">
-                            <label for="name"></label>
-                            <input type="text" class="form-control" {% if user.is_authenticated %} 
-                              value="{{ user.username }}" id="name" placeholder="Your Name" required>
-                          </div>
-                          div class="form-group">
-                              <label for="phone"></label>
-                              <input type="text" class="form-control" id="phone" placeholder="Phone" required>
-                            </div>
-                            <div class="form-group">
-                              <label for="email1"></label>
-                              <input type="email" class="form-control" % if user.is_authenticated %} 
-                              value="{{ user.email }}" id="email1" aria-describedby="emailHelp" placeholder="Enter email">
-                              
-                            </div>
-                            <div class="form-group">
-                                <label for="textarea">{{ home.title }}</label>
-                                <textarea class="form-control" id="textarea" rows="3" placeholder="I am interested in ..."></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                          </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
-      </div>
+    def clean_address(self, *args, **kwargs):
+        address = self.cleaned_data.get('address')
+        word_count = len(address)
+        if word_count > 25:
+            raise forms.ValidationError("This field is too long")
+        if not address:
+            raise forms.ValidationError("Empty. Fill the field")
+        
+        return address
+
+    def clean_zipcode(self, *args, **kwargs):
+        zipcode = self.cleaned_data.get('zipcode')
+        word_count = len(zipcode)
+        if word_count != 5:
+            raise forms.ValidationError("Five numeric strings are needed")
+        if not zipcode:
+            raise forms.ValidationError("Empty. Choose a State")
+        if not zipcode.isdigit():
+            raise forms.ValidationError('Phone number can only contains digits')
+    
+        return zipcode
+
+    def clean_city(self, *args, **kwargs):
+        city = self.cleaned_data.get('city')
+        if len(city) > 25:
+            raise forms.ValidationError("This field is too long")
+        if not city:
+            raise forms.ValidationError("Empty. Fill the field")
+        
+        return city
+    
+    def clean_price(self, *args, **kwargs):
+        price = self.cleaned_data.get('price')
+        word_count = len(str(price).split())
+        if word_count > 9:
+             raise forms.ValidationError("This field should contain a minimum of 9 integers")
+        
+        return price
+
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'POST'
+        self.helper.layout = Layout(
+            'property_title',
+            'address',
+            Row(
+                Column('city', css_class='form-group col-md-4 mb-0'),
+                Column('state', css_class='form-group col-md-4 mb-0'),
+                Column('zipcode', css_class='form-group col-md-4 mb-0'),
+                css_class='form-row'
+            ),
+            'information',
+            'price',
+            Row(
+                Column('bedrooms', css_class='form-group col-md-4 mb-0'),
+                Column('bathrooms', css_class='form-group col-md-4 mb-0'),
+                Column('garage', css_class='form-group col-md-4 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('homesize', css_class='form-group col-md-4 mb-0'),
+                Column('landsize', css_class='form-group col-md-4 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('top_photo', css_class='form-group col-md-4 p-4'),
+                Column('picture1', css_class='form-group col-md-4 p-4'),
+                Column('picture2', css_class='form-group col-md-4 p-4'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('picture3', css_class='form-group col-md-4 p-4'),
+                Column('picture4', css_class='form-group col-md-4 p-4'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('picture5', css_class='form-group col-md-4 p-4'),
+                Column('picture6', css_class='form-group col-md-4 p-4'),
+                css_class='form-row'
+            ),
+            'is_posted',
+            'date_posted',
+            
+            Submit('submit', 'Post your house')
+        )
+

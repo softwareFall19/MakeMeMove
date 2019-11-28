@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'userprofiles.apps.UserprofilesConfig',
     'renters.apps.RentersConfig',
     'contacts.apps.ContactsConfig',
+    'advertising.apps.AdvertisingConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.humanize',
@@ -143,3 +144,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = 'index'
+
+STRIPE_SECRET_KEY = 'sk_test_g7rU0cS2Qv7EoZdSsg8gKjBP00K2p0QreD'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_wFwG5kndLk5CnhGyhLHDcVzr00zHEd12rd'
+
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 587

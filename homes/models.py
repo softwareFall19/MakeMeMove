@@ -8,7 +8,7 @@ from datetime import datetime
 class Home(models.Model):
     """Creating the components of Listing; to be coupled with the movingdb database."""
     agent = models.ForeignKey(Agent, on_delete=models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name=None)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, related_name=None)
     property_title = models.CharField(max_length=150)
     address = models.CharField(max_length=150)
     city = models.CharField(max_length=200)
@@ -27,7 +27,7 @@ class Home(models.Model):
     ) 
     state = models.CharField(max_length=100, choices= State_Choices)
     zipcode = models.CharField(max_length=100)
-    information = models.TextField(blank=True)
+    information = models.TextField(default='')
     price = models.IntegerField()
     bedrooms = models.IntegerField()
     bathrooms = models.DecimalField(max_digits=2, decimal_places=1)
@@ -42,7 +42,7 @@ class Home(models.Model):
     picture5 = models.FileField(upload_to='pictures/%Y/%m/%d/', blank=True)
     picture6 = models.FileField(upload_to='pictures/%Y/%m/%d/', blank=True)
     is_posted = models.BooleanField(default=True)
-    date_posted = models.DateTimeField(default=datetime.now, blank=True)
+    date_posted = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
         return self.property_title

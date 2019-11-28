@@ -1,3 +1,11 @@
 from django.shortcuts import render
 
-# Create your views here.
+from .models import Agent
+
+def agents(request):
+    agents = Agent.objects.all()
+
+    context = {
+        'agents': agents
+    }
+    return render(request, 'agents/agents.html', context)

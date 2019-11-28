@@ -7,7 +7,7 @@ class Contact(models.Model):
     phone = models.CharField(max_length=150)
     home_id = models.IntegerField(default=0)
     message = models.TextField(blank=True)
-    user_id = models.IntegerField(blank=True)
+    user_id = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

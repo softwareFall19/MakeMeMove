@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+
+{% block content %}
+
+<!-- Modal -->
+<div class="modal fade" id="contactAgent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Contact Agent</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <form method="POST" action="{% url 'info' %}">
+                            {% csrf_token %}
+                            {% if user.is_authenticated %}
+                               <input type="hidden" name="user_id" value="{{ user.id }}">
+                            {% else %}
+                            <input type="hidden" name="user_id" value="0">
+                            {% endif %}
+                            <input type="hidden" name="agent_email" value="{{ rental.agent.email }}">
+                            <input type="hidden" name="rental_id" value="{{ rental.id }}">
+                                <div class="form-group">
+                                <label for="name"></label>
+                                <input type="text" class="form-control" name="name" {% if user.is_authenticated %} 
+                                  value="{{ user.username }}" {% endif %} id="name" placeholder="Your Name" required>
+                              </div>
+                              <div class="form-group">
+                                  <label for="phone"></label>
+                                  <input type="text" class="form-control" id="phone" placeholder="Phone" required>
+                             </div>
+                                <div class="form-group">
+                                  <label for="email1"></label>
+                                  <input type="email" class="form-control" name="email" {% if user.is_authenticated %} 
+                                  value="{{ user.email }}" {% endif %} id="email1" aria-describedby="emailHelp" placeholder="Enter email">
+                                  
+                                </div>
+                                <div class="form-group">
+                                    <label for="textarea">{{ rental.property_title }}</label>
+                                    <textarea class="form-control" id="textarea" rows="3" placeholder="I am interested in {{ rental.address }}"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                              </form>
+                    
+            </div>
+            
+          </div>
+</div>
+</div>
+
+<section id="homeBkground" class="pt-5">
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card" id="cardCenter" style="width: 30rem;">
+                        <h5 class="card-header">{{ rental.property_title }} &nbsp; <span>Agent: {{ rental.agent.name }}</span></h5>
+                        <div class="card-header">
+                                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#contactAgent">Contact Agent</button>
+                                <button type="button" class="btn btn-secondary btn-lg">Schedule a tour</button>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">${{ rental.price | intcomma }}/month</h4>
+                            <h5 class="card-title">{{ rental.address }}</h5>
+                            <p>{{ rental.city }}, {{ rental.state }} {{ rental.zipcode }}</p>
+                            <hr>
+                                <div class="row py-2 text-secondary">
+                                    <div class="col-6">{{ rental.homesize  | intcomma }} sqft</div>
+                        
+                                    <div class="col-6">Garage: {{ rental.garage }}</div>
+                                </div>
+                                <div class="row py-2 text-secondary">
+                                    <div class="col-6">Bds: {{ rental.bedrooms }}</div>
+                                    <div class="col-6">Ba: {{ rental.bathrooms }}</div>
+                                </div>
+                            <hr>
+                        </div>
+                        
+                </div>
+            </div>
+            <div class="picList col-md-4">
+                <div class="row">
+                    <div class="col-md-5 mb-2">
+                        <div class="card">
+                            <a href="{{ rental.top_photo.url }}" data-lightbox="pixPics"><img src="{{ rental.top_photo.url }}" class="card-img-top" alt=""></a>
+                        </div>
+                    </div>
+                    {% if rental.picture1 %}
+                    <div class="col-md-5">
+                        <div class="card">
+                            <a href="{{ rental.picture1.url }}" data-lightbox="pixPics"><img src="{{ rental.picture1.url }}" class="card-img-top" alt=""></a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if rental.picture2 %}
+                    <div class="col-md-5">
+                            <div class="card">
+                                <a href="{{ rental.picture2.url }}" data-lightbox="pixPics"><img src="{{ rental.picture2.url }}" class="card-img-top" alt=""></a>
+                            </div>
+                    </div>
+                    {% endif %}
+                    {% if rental.picture3 %}
+                    <div class="col-md-5 mb-2">
+                            <div class="card">
+                                <a href="{{ rental.picture3.url }}" data-lightbox="pixPics"><img src="{{ rental.picture3.url }}" class="card-img-top" alt=""></a>
+                            </div>
+                    </div>
+                    {% endif %}
+                    {% if rental.picture4 %}
+                    <div class="col-md-5 mb-2">
+                            <div class="card">
+                                <a href="{{ rental.picture4.url }}" data-lightbox="pixPics"><img src="{{ rental.picture4.url }}" class="card-img-top" alt=""></a>
+                            </div>
+                    </div>
+                    {% endif %}
+                    {% if rental.picture5 %}
+                    <div class="col-md-5 mb-2">
+                            <div class="card">
+                                <a href="{{ rental.picture5.url }}" data-lightbox="pixPics"><img src="{{ rental.picture5.url }}" class="card-img-top" alt=""></a>
+                            </div>
+                    </div>
+                    {% endif %}
+                    {% if rental.picture6 %}
+                    <div class="col-md-5">
+                            <div class="card">
+                                <a href="{{ rental.picture6.url }}" data-lightbox="pixPics"><img src="{{ rental.picture6.url }}" class="card-img-top" alt=""></a>
+                            </div>
+                    </div>
+                    {% endif %}
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+
+    
+{% endblock %}
+
+
+ 

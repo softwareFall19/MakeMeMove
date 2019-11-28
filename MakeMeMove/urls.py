@@ -6,10 +6,13 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', include('webpages.urls')),
-    path('admin/', admin.site.urls),
     path('homes/', include('homes.urls')),
+    path('renters/', include('renters.urls')),
     path('contacts/', include('contacts.urls')),
     path('userprofiles/', include('userprofiles.urls')),
+    path('agents', include('agents.urls')),
+    path('advertising', include('advertising.urls')),
+    path('admin/', admin.site.urls),
     
 ] 
 

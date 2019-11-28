@@ -9,26 +9,27 @@ from .models import Home
 
 class SellerForm(forms.ModelForm):
 
-    property_title = models.CharField(max_length=150)
-    address = models.CharField(max_length=150)
-    city = models.CharField(max_length=200)
-    state = models.CharField(max_length=100)
-    zipcode = models.CharField(max_length=100)
-    price = models.IntegerField()
-    bedrooms = models.IntegerField()
-    bathrooms = models.DecimalField(max_digits=2, decimal_places=1)
-    garage = models.IntegerField(default=0)
-    homesize = models.IntegerField()
-    landsize = models.DecimalField(max_digits=5, decimal_places=1)
-    top_photo = models.FileField(upload_to='pictures/%Y/%m/%d/')
+    # property_title = models.CharField(max_length=150)
+    # address = models.CharField(max_length=150)
+    # city = models.CharField(max_length=200)
+    # state = models.CharField(max_length=100)
+    # zipcode = models.CharField(max_length=100)
+    # price = models.IntegerField()
+    # bedrooms = models.IntegerField()
+    # bathrooms = models.DecimalField(max_digits=2, decimal_places=1)
+    # garage = models.IntegerField(default=0)
+    # homesize = models.IntegerField()
+    # landsize = models.DecimalField(max_digits=5, decimal_places=1)
+    # top_photo = models.FileField(upload_to='pictures/%Y/%m/%d/')
 
 
     class Meta:
         model = Home
         fields = ('property_title', 'address', 'city', 'state', 'zipcode', 'information', 'price', 
                   'bedrooms', 'bathrooms', 'garage', 'homesize', 'landsize', 'top_photo', 'picture1',
-                  'picture2', 'picture3', 'picture4', 'picture5', 'picture6', 'is_posted', 'date_posted')
-    
+                  'picture2', 'picture3', 'picture4', 'picture5', 'picture6', 'is_posted', 'date_posted'
+                )
+
     def clean_property_title(self, *args, **kwargs):
         property_title = self.cleaned_data.get('property_title')
         word_count = len(property_title)
@@ -128,3 +129,5 @@ class SellerForm(forms.ModelForm):
             Submit('submit', 'Post your house')
         )
 
+    
+    

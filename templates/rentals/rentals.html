@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+
+{% block content %}
+
+
+      
+<section class="pt-5">
+  <div class="container pt-5">
+        <!-- <div class="float-left pt-5"> -->
+        <form method="GET" action="{% url 'search' %}" class="search">
+            {% csrf_token %}
+            <div class="input-group">
+                    <input class="form-control" type="search" name="search" value="{{ request.GET.get.search }}" placeholder="Enter an address, city or ZIP code">
+                <div class="input-group-btn">
+                    <button type="submit" class="btn btn-info" value=""><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+    <!-- </div> -->
+  </div>
+    
+</section>      
+   
+ <section id="rentals" class="">
+        <div class="container pt-5">
+            <div class="row">
+                {% if rentals  %}
+                    {% for rental in rentals %}
+                    
+                    <div class="col-md-3 mb-4">
+                      <div class="card openBtn">
+                          <a href="{% url 'rental' rental.id %}">
+                             <img src="{{ rental.top_photo.url }}" class="card-img-top" alt="...">
+                             <div class="card-img-overlay">
+                               <p class="card-title">{{ rental.date_posted | timesince }}</p>
+                             </div>
+                          </a>
+                        <div class="card-body">
+                          <h4 class="card-title">${{ rental.price | intcomma }}/month</h4>
+                          <h5 class="card-title">{{ rental.address }}</h5>
+                          <p>{{ rental.city }}, {{ rental.state }} {{ rental.zipcode }}</p>
+                          <hr>
+                            <div class="row py-2 text-secondary">
+                                <div class="col-6">{{ rental.homesize  | intcomma }} sqft</div>
+                      
+                                <div class="col-6"></i> Garage: {{ rental.garage }}</div>
+                            </div>
+                            <div class="row py-2 text-secondary">
+                                <div class="col-6">Bds: {{ rental.bedrooms }}</div>
+                                <div class="col-6">Ba: {{ rental.bathrooms }}</div>
+                            </div>
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                  
+
+                {% endfor %}
+
+                {% else %}
+                  <div class="col-md-10">
+                      <p>No Rentals listed</p>
+                  </div>
+
+                {% endif %}
+            </div>    
+                
+            
+        </div>
+        
+            
+ </section>
+    
+{% endblock %}
+
+
+ 
