@@ -41,6 +41,7 @@
                                 </li> 
                         
                         {% else %}
+                                <li class="nav-item"></li>
                                         <a class="nav-link" href="{% url 'signup' %}">Sign up</a>
                                 </li>
                                 <li class="nav-item">
@@ -50,6 +51,10 @@
                                         <a class="nav-link" href="{% url 'advertising' %}">Advertise</a>
                                 </li> 
                         {% endif %}
+
+                        <!-- <li class="nav-item">
+                                <a class="nav-link" href="{% url 'advertising' %}">Advertise</a>
+                        </li>  -->
                   </ul>
             
             </div>

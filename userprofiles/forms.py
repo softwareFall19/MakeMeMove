@@ -7,7 +7,6 @@ from userprofiles.models import Profile
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField()
-
     class Meta:
         model = User
         fields = ["username","first_name", "last_name", "email", "password1", "password2"]
@@ -16,7 +15,6 @@ class RegisterForm(UserCreationForm):
 
 class LoginForm(UserCreationForm):
     email = forms.EmailField()
-
     class Meta:
         model = User
         fields = ('email', 'password')
