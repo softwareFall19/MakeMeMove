@@ -49,4 +49,4 @@ def infoRental(request):
 
         messages.success(request, "Thank you for your request, we will contact you shortly")
         return redirect('/renters/'+rental_id)
-    
+

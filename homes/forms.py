@@ -9,19 +9,6 @@ from .models import Home
 
 class SellerForm(forms.ModelForm):
 
-    # property_title = models.CharField(max_length=150)
-    # address = models.CharField(max_length=150)
-    # city = models.CharField(max_length=200)
-    # state = models.CharField(max_length=100)
-    # zipcode = models.CharField(max_length=100)
-    # price = models.IntegerField()
-    # bedrooms = models.IntegerField()
-    # bathrooms = models.DecimalField(max_digits=2, decimal_places=1)
-    # garage = models.IntegerField(default=0)
-    # homesize = models.IntegerField()
-    # landsize = models.DecimalField(max_digits=5, decimal_places=1)
-    # top_photo = models.FileField(upload_to='pictures/%Y/%m/%d/')
-
 
     class Meta:
         model = Home

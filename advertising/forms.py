@@ -6,4 +6,12 @@ from .models import Advertise
 class AdvertiseForm(forms.ModelForm):
     class Meta:
         model = Advertise
-        exclude = ['ad_picture', 'card_title', 'card_text'] 
+        fields = ('role', 'name', 'information', 'telephone', 'email')
+
+
+
+        
+
+
+
+        
