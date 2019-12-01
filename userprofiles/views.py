@@ -14,7 +14,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 import stripe 
 from django.views.generic.base import TemplateView
-from .forms import RegisterForm, ProfileForm
+from .forms import RegisterForm
 
 stripe.api_key = settings.STRIPE_SECRET_KEY # new
 
@@ -26,27 +26,27 @@ def signup(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'You are registered, {username}')
-            #return redirect('signin')
-            user_form = RegisterForm(data=request.POST)
-            profile_form = ProfileForm(data=request.POST)
-            if user_form.is_valid() and profile_form.is_valid():
-                #username = form.cleaned_data.get('username')
-                user = user_form.save()
-                user.set_password(user.password)
-                user.is_active = False
-                user.save()
-                profile = profile_form.save(commit=False)
-                profile.user = user
-                current_site = get_current_site(request)
-                subject = 'Thank you for registering with us. Please activate your account.'
-                message = render_to_string('userprofiles/account_activation_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': account_activation_token.make_token(user),
-            })
-                user.email_user(subject, message)
-                return render(request, "userprofiles/account_activation_sent.html")
+            return redirect('signin')
+            # user_form = RegisterForm(data=request.POST)
+            # profile_form = ProfileForm(data=request.POST)
+            # if user_form.is_valid() and profile_form.is_valid():
+            #     #username = form.cleaned_data.get('username')
+            #     user = user_form.save()
+            #     user.set_password(user.password)
+            #     user.is_active = False
+            #     user.save()
+            #     profile = profile_form.save(commit=False)
+            #     profile.user = user
+            #     current_site = get_current_site(request)
+            #     subject = 'Thank you for registering with us. Please activate your account.'
+            #     message = render_to_string('userprofiles/account_activation_email.html', {
+            #     'user': user,
+            #     'domain': current_site.domain,
+            #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            #     'token': account_activation_token.make_token(user),
+            # })
+            #     user.email_user(subject, message)
+            #     return render(request, "userprofiles/account_activation_sent.html")
     else:
         form = RegisterForm()
     return render(request, "userprofiles/signup.html", {"form":form})
