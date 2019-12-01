@@ -14,6 +14,6 @@ urlpatterns = [
     path('user_home', views.UserProfileView.as_view(), name='user_home'),
     #path('make_payment', views.get_context_data, name='make_payment'),
     #path('make_payment', views.PaymentView.as_view(), name='make_payment'),
-    path('thankyou_payment', views.charge, name='thankyou_payment'),    
+    path('paymentconfirmation_sent', views.charge, name='paymentconfirmation_sent'),    
 
 ]
