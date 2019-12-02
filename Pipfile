@@ -9,6 +9,7 @@ django-crispy-forms = "*"
 stripe = "*"
 gunicorn = "*"
 psycopg2 = "*"
+django-heroku = "*"
 
 [dev-packages]
 pylint = "*"
