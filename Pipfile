@@ -10,6 +10,7 @@ stripe = "*"
 gunicorn = "*"
 psycopg2 = "*"
 django-heroku = "*"
+pillow = "*"
 
 [dev-packages]
 pylint = "*"
