@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-
+from homes.forms import ScheduleTourForm
 from . models import Rental
 from django.db.models import Q
 
@@ -20,8 +20,18 @@ def rental(request, rental_id):
 
     rental = get_object_or_404(Rental, pk=rental_id)
 
+    if request.method == 'POST':
+        form = ScheduleTourForm(request.POST)
+        if form.is_valid():
+            #data = (form.cleaned_data)
+            form.save()
+    
+    else:
+        form = ScheduleTourForm()
+
     context = {
-        'rental': rental
+        'rental': rental,
+        'form': form
     }
 
     
