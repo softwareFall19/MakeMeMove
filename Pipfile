@@ -11,6 +11,7 @@ gunicorn = "*"
 psycopg2 = "*"
 django-heroku = "*"
 Pillow = "*"
+pillow = "*"
 
 [dev-packages]
 pylint = "*"
