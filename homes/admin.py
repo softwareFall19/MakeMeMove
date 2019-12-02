@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Home
+from .models import Home, Appointments
 
 # Register your models here.
 
@@ -13,3 +13,4 @@ class AdminHome(admin.ModelAdmin):
     search_fields = ('property_title', 'address', 'city', 'price', 'state', 'zipcode', 'bathrooms', 'bedrooms')
 
 admin.site.register(Home, AdminHome)
+admin.site.register(Appointments)

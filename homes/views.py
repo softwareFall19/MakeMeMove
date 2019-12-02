@@ -2,12 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import Home
 from django.db.models import Q
-from .forms import SellerForm
-from django.contrib.auth.decorators import login_required
-
-
-
-
+from .forms import SellerForm, ScheduleTourForm
 
 # Create your views here.
 
@@ -25,11 +20,20 @@ def home(request, home_id):
 
     home = get_object_or_404(Home, pk=home_id)
 
+    if request.method == 'POST':
+        form = ScheduleTourForm(request.POST)
+        if form.is_valid():
+            #data = (form.cleaned_data)
+            form.save()
+    
+    else:
+        form = ScheduleTourForm()
+ 
     context = {
-        'home': home
+        'home': home,
+        'form': form
     }
 
-    
     return render(request, 'home_listings/home.html', context)
 
 

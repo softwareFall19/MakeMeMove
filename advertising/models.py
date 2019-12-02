@@ -2,7 +2,7 @@ from django.db import models
 
 class Advertise(models.Model):
     Role_Choices = (
-        ("An agent/broker", "An agent/broker"), ("Homebuyer/seller", "Homebuyer/seler"), ("Other professionals", "Other professionals"),
+        ("An agent/broker", "An agent/broker"), ("Homebuyer/seller", "Homebuyer/seller"), ("Other professionals", "Other professionals"),
 
     )
     role = models.CharField(max_length=100, choices= Role_Choices)

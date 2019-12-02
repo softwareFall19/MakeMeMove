@@ -1,5 +1,7 @@
 from django import forms
-from django.db import models
+#from django.db import models
+
+from .models import Appointments
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
@@ -117,4 +119,7 @@ class SellerForm(forms.ModelForm):
         )
 
     
-    
+class ScheduleTourForm(forms.ModelForm):
+    class Meta:
+        model = Appointments
+        fields= '__all__'

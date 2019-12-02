@@ -3,6 +3,7 @@ from agents.models import Agent
 from django.contrib.auth.models import User
 from datetime import datetime
 
+
 # Create your models here.
 
 class Home(models.Model):
@@ -46,3 +47,13 @@ class Home(models.Model):
 
     def __str__(self):
         return self.property_title
+
+class Appointments(models.Model):
+    date = models.CharField(max_length=100)
+    agent = models.ForeignKey(Agent, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, related_name=None)
+    home = models.ForeignKey(Home, on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return str(self.user)
+
