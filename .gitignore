@@ -109,6 +109,8 @@ celerybeat-schedule
 
 # mkdocs documentation
 /site
+# piplock
+pipfile.lock
 
 # mypy
 .mypy_cache/
