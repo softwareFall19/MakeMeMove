@@ -1,7 +1,9 @@
 from django.shortcuts import redirect
+from django.conf import settings
+from django.core.mail import send_mail
 from .models import Contact, ContactRental
 from django.contrib import messages
-from django.core.mail import send_mail as email_agent
+
 
 
 def infoHome(request):
@@ -19,14 +21,20 @@ def infoHome(request):
 
         contact_by_email.save()
 
-        email_agent(
+        send_mail(
             'Requesting Home Information',
-            'A request for this home',
-            'dfdavii@gmail.com',
+            'A request for this home ' + home_id,
+            settings.EMAIL_HOST_USER,
             [agent_email],
             fail_silently=False
 
-
+        )
+        send_mail(
+            'Thank you for contacting MakeMeMove',
+            'Thank you for contacting MakeMeMove, You will soon be contacted by an agent',
+            settings.EMAIL_HOST_USER,
+            [contact_by_email.email],
+            fail_silently=False   
         )
 
         messages.success(request, "Thank you for your request, we will contact you shortly")
