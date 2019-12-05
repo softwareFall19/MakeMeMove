@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.shortcuts import redirect, render
-from django.core.mail import send_mail as email_admin
+from django.core.mail import send_mail
 from django.contrib import messages
 
 # from .models import Advertise
@@ -17,7 +17,7 @@ def advertising(request):
             information = form.cleaned_data.get('information')
             telephone = form.cleaned_data.get('telephone')
             email = form.cleaned_data.get('email')
-            form.save()
+            saved_form = form.save()
 
             # email subject, message
             subject = 'Contacting Admin for Advertise'
@@ -31,13 +31,20 @@ def advertising(request):
             from_email = settings.EMAIL_HOST_USER
             to_admin = [from_email, 'dfdavii@gmail.com']
 
-            email_admin(
+            send_mail(
                 subject,
                 ad_message,
                 from_email,
                 to_admin,
                 fail_silently=False,
             )
+            send_mail(
+            'Thank you for contacting MakeMeMove',
+            'Thank you for contacting MakeMeMove, You will soon be contacted by an agent',
+            settings.EMAIL_HOST_USER,
+            [saved_form.email],
+            fail_silently=False   
+        )
             messages.success(request, "Thank you for your request, we will contact you shortly")
             return redirect('index')
     else:
