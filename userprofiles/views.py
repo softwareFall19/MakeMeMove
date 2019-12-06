@@ -2,19 +2,19 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.contrib.auth import login, logout
-from django.http import HttpResponse
+#from django.http import HttpResponse
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+#from django.utils.encoding import force_bytes, force_text
+#from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 #from .tokens import account_activation_token
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 # from userprofiles.models import Profile
 # from django.core.mail import EmailMessage
 from django.conf import settings
 import stripe 
 from django.views.generic.base import TemplateView
-from .forms import RegisterForm, ProfileForm
+from .forms import RegisterForm
 from .models import Payment
 
 stripe.api_key = settings.STRIPE_SECRET_KEY # new
@@ -27,27 +27,27 @@ def signup(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'You are registered, {username}')
-            #return redirect('signin')
-            user_form = RegisterForm(data=request.POST)
-            profile_form = ProfileForm(data=request.POST)
-            if user_form.is_valid() and profile_form.is_valid():
-                #username = form.cleaned_data.get('username')
-                user = user_form.save()
-                user.set_password(user.password)
-                user.is_active = False
-                user.save()
-                profile = profile_form.save(commit=False)
-                profile.user = user
-                current_site = get_current_site(request)
-                subject = 'Thank you for registering with us. Please activate your account.'
-                message = render_to_string('userprofiles/account_activation_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': account_activation_token.make_token(user),
-            })
-                user.email_user(subject, message)
-                return render(request, "userprofiles/account_activation_sent.html")
+            return redirect('signin')
+            # user_form = RegisterForm(data=request.POST)
+            # profile_form = ProfileForm(data=request.POST)
+            # if user_form.is_valid() and profile_form.is_valid():
+            #     #username = form.cleaned_data.get('username')
+            #     user = user_form.save()
+            #     user.set_password(user.password)
+            #     user.is_active = False
+            #     user.save()
+            #     profile = profile_form.save(commit=False)
+            #     profile.user = user
+            #     current_site = get_current_site(request)
+            #     subject = 'Thank you for registering with us. Please activate your account.'
+            #     message = render_to_string('userprofiles/account_activation_email.html', {
+            #     'user': user,
+            #     'domain': current_site.domain,
+            #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            #     'token': account_activation_token.make_token(user),
+            # })
+            #     user.email_user(subject, message)
+            #     return render(request, "userprofiles/account_activation_sent.html")
     else:
         form = RegisterForm()
     return render(request, "userprofiles/signup.html", {"form":form})
@@ -68,21 +68,21 @@ def signout(request):
     logout(request)
     return redirect('index')
 
-def activate(request, uidb64, token):
-    try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=uid)
-    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-        user = None
+# def activate(request, uidb64, token):
+#     try:
+#         uid = force_text(urlsafe_base64_decode(uidb64))
+#         user = User.objects.get(pk=uid)
+#     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+#         user = None
 
-    if user is not None and account_activation_token.check_token(user, token):
-        user.is_active = True
-        user.profile.email_confirmed = True
-        user.save()
-        login(request, user)
-        return HttpResponse('Thank you for your email confirmation. Now you can login to your account.')
-    else:
-        return HttpResponse('Activation link is invalid!')
+#     if user is not None and account_activation_token.check_token(user, token):
+#         user.is_active = True
+#         user.profile.email_confirmed = True
+#         user.save()
+#         login(request, user)
+#         return HttpResponse('Thank you for your email confirmation. Now you can login to your account.')
+#     else:
+#         return HttpResponse('Activation link is invalid!')
 
 class UserProfileView(TemplateView):
     template_name = 'userprofiles/user_home.html'
@@ -111,7 +111,7 @@ def charge(request): # new
         print(charge['amount'])
         Payment.objects.create(name=name,amount=amount)
         user = request.user
-        current_site = get_current_site(request)
+        #current_site = get_current_site(request)
         subject = 'Thank you for the payment!'
         message = render_to_string('userprofiles/thankyou_payment.html', {
                 'user': user
